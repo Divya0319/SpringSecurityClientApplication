@@ -11,5 +11,7 @@ public class AppUserDTO {
 
     private String lname;
 
+    private String username;
+
     private String email;
 }

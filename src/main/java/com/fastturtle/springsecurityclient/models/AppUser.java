@@ -13,6 +13,8 @@ public class AppUser extends BaseModel {
 
     private String lname;
 
+    private String username;
+
     private String password;
 
     private String email;

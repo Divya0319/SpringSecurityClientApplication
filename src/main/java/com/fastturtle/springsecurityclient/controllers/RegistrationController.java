@@ -21,6 +21,7 @@ public class RegistrationController {
         AppUser registeredUser = userService.registerUser(
                 user.getFname(),
                 user.getLname(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getEmail());
 
@@ -31,7 +32,8 @@ public class RegistrationController {
         AppUserDTO appUserDTO = new AppUserDTO();
         appUserDTO.setFname(appUser.getFname());
         appUserDTO.setLname(appUser.getLname());
-        appUserDTO.setEmail(appUserDTO.getEmail());
+        appUserDTO.setUsername(appUser.getUsername());
+        appUserDTO.setEmail(appUser.getEmail());
 
         return appUserDTO;
     }
