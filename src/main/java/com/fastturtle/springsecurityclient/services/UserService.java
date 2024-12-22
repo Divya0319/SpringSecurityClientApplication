@@ -16,13 +16,14 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AppUser registerUser(String fname, String lname, String username, String password, String email) {
+    public AppUser registerUser(String fname, String lname, String username, String password, String email, String role) {
         AppUser appUser = new AppUser();
         appUser.setFname(fname);
         appUser.setLname(lname);
         appUser.setUsername(username);
         appUser.setEmail(email);
         appUser.setPassword(bCryptPasswordEncoder.encode(password));
+        appUser.setRole(role);
 
         appUser.setStatus(Status.ACTIVE);
 

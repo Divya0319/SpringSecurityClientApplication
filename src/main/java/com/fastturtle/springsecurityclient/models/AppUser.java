@@ -1,5 +1,6 @@
 package com.fastturtle.springsecurityclient.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +19,6 @@ public class AppUser extends BaseModel {
     private String password;
 
     private String email;
+
+    private String role;
 }

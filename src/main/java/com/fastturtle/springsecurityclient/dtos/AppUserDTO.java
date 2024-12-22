@@ -14,4 +14,6 @@ public class AppUserDTO {
     private String username;
 
     private String email;
+
+    private String role;
 }
