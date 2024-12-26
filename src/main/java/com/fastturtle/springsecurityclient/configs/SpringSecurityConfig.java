@@ -26,8 +26,8 @@ public class SpringSecurityConfig {
         http.cors(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(
-                auth -> auth.requestMatchers("/users/**").permitAll()
-                        .anyRequest().authenticated()
+                auth -> auth.requestMatchers("/hello").hasAuthority("ADMIN")
+                        .anyRequest().permitAll()
         ).formLogin(Customizer.withDefaults());
 
         return http.build();
