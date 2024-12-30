@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 public class SpringSecurityConfig {
@@ -28,7 +29,9 @@ public class SpringSecurityConfig {
         http.authorizeHttpRequests(
                 auth -> auth.requestMatchers("/hello").hasAuthority("ADMIN")
                         .anyRequest().permitAll()
-        ).formLogin(Customizer.withDefaults());
+        ).exceptionHandling(exception ->
+                        exception.accessDeniedHandler(accessDeniedHandler()))
+                .formLogin(Customizer.withDefaults());
 
         return http.build();
     }
@@ -44,5 +47,12 @@ public class SpringSecurityConfig {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedHandler) -> {
+            response.sendRedirect("/access-denied");
+        };
     }
 }
