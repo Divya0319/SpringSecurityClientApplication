@@ -1,6 +1,7 @@
 package com.fastturtle.springsecurityclient.configs;
 
 import com.fastturtle.springsecurityclient.services.CustomUserDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,8 +52,13 @@ public class SpringSecurityConfig {
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
+//        return (request, response, accessDeniedHandler) -> {
+//            response.sendRedirect("/access-denied");
+//        };
         return (request, response, accessDeniedHandler) -> {
-            response.sendRedirect("/access-denied");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\": \"Access Denied\"}");
         };
     }
 }
