@@ -33,6 +33,20 @@ public class UserService {
 
         appUser.setStatus(Status.ACTIVE);
 
+        for(Role role : roles) {
+            role.setUser(appUser);
+            role.setStatus(Status.ACTIVE);
+        }
+
+        appUser.setRoles(roles);
+
+        for(Authority authority : authorities) {
+            authority.setUser(appUser);
+            authority.setStatus(Status.ACTIVE);
+        }
+
+        appUser.setAuthorities(authorities);
+
         return userRepository.save(appUser);
     }
 }

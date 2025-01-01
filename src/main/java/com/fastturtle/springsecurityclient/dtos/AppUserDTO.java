@@ -5,6 +5,7 @@ import com.fastturtle.springsecurityclient.models.Role;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,25 @@ public class AppUserDTO {
 
     private String email;
 
-    private List<Role> roles;
+    private List<RolesDTO> roles;
 
-    private List<Authority> authorities;
+    private List<AuthorityDTO> authorities;
+
+    public void addRole(RolesDTO rolesDTO) {
+        if(roles == null) {
+            roles = new ArrayList<>();
+        }
+
+        roles.add(rolesDTO);
+
+    }
+
+    public void addAuthority(AuthorityDTO authorityDTO) {
+        if(authorities == null) {
+            authorities = new ArrayList<>();
+        }
+
+        authorities.add(authorityDTO);
+
+    }
 }
