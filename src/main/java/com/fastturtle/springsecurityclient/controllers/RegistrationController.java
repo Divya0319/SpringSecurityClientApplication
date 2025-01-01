@@ -24,7 +24,8 @@ public class RegistrationController {
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
-                user.getRole());
+                user.getRoles(),
+                user.getAuthorities());
 
         return from(registeredUser);
     }
@@ -35,7 +36,8 @@ public class RegistrationController {
         appUserDTO.setLname(appUser.getLname());
         appUserDTO.setUsername(appUser.getUsername());
         appUserDTO.setEmail(appUser.getEmail());
-        appUserDTO.setRole(appUser.getRole());
+        appUserDTO.setRoles(appUser.getRoles());
+        appUserDTO.setAuthorities(appUser.getAuthorities());
 
         return appUserDTO;
     }

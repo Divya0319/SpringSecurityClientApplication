@@ -1,9 +1,14 @@
 package com.fastturtle.springsecurityclient.models;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,5 +25,9 @@ public class AppUser extends BaseModel {
 
     private String email;
 
-    private String role;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Role> roles;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Authority> authorities;
 }
