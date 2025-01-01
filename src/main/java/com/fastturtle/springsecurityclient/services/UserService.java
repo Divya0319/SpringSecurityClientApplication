@@ -4,19 +4,23 @@ import com.fastturtle.springsecurityclient.models.AppUser;
 import com.fastturtle.springsecurityclient.models.Authority;
 import com.fastturtle.springsecurityclient.models.Role;
 import com.fastturtle.springsecurityclient.models.Status;
+import com.fastturtle.springsecurityclient.repositories.RoleRepository;
 import com.fastturtle.springsecurityclient.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -48,5 +52,16 @@ public class UserService {
         appUser.setAuthorities(authorities);
 
         return userRepository.save(appUser);
+    }
+
+    public List<AppUser> fetchUsersByRole(String role) {
+        List<Role> roles = roleRepository.findByName(role);
+        List<AppUser> users = new ArrayList<>();
+
+        if(!roles.isEmpty()) {
+            roles.forEach(r -> users.add(r.getUser()));
+        }
+
+        return users;
     }
 }
